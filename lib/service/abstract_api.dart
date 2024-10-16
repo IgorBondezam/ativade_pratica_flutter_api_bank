@@ -28,18 +28,21 @@ abstract class AbstractApi<T> {
     await http.post(Uri.parse("$url/${rota()}"),
       body: jsonEncode(toJson(object)),
     );
-    return {"status": 201, "message": "Criação feita com sucesso!"};
+    return {"status": 201, "message": "Criação realizada!"};
   }
 
   Future<Map<String, dynamic>> delete(String id) async {
     await http.delete(Uri.parse("$url/${rota()}/$id"));
-    return {"status": 204, "message": "Exclusão feita com sucesso!"};
+    return {"status": 204, "message": "Exclusão realizada!"};
   }
 
-  Future<Map<String, dynamic>> update(String id, T object) async {
+  Future<Map<String, dynamic>> update(int id, T object) async {
+    print(object);
+    print(id);
     await http.put(Uri.parse("$url/${rota()}/$id"),
+      headers: {"Content-Type": "application/json"},
       body: jsonEncode(toJson(object)),
     );
-    return {"status": 200, "message": "Atualização feita com sucesso!"};
+    return {"status": 200, "message": "Atualização realizada!"};
   }
 }
